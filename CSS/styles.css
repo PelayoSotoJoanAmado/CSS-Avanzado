@@ -21,7 +21,7 @@ nav a {
 }
 
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 480px) {
     nav {
         background-color: rgb(148, 241, 210);
         flex-direction: column;
