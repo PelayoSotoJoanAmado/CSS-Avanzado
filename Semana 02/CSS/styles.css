@@ -1,0 +1,71 @@
+html {
+    box-sizing: border-box;
+
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+
+header {
+    background-color: aquamarine;
+    padding: 2rem;
+    margin: auto;
+    position: sticky;
+
+}
+
+main {
+    display: flex;
+}
+
+section {
+    /* margin: .5rem auto .5rem auto; */
+    display: flex;
+    /* flex-wrap: wrap; */
+}
+
+
+aside {
+    background-color: bisque;
+    padding: 2rem;
+    display: flex;
+    /* flex-direction: column; */
+    width: 200px;
+    height: 100vh;
+    margin: .5rem .5rem .5rem 0;
+
+}
+
+.tarjetas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    /* flex-direction: column; */
+    margin: .5rem 0 .5rem .5rem;
+    max-height: 10rem;
+
+}
+
+article {
+    width: 5rem;
+    max-height: 8rem;
+    background-color: chartreuse;
+    padding: auto;
+    place-content: center;
+    text-align: center;
+
+}
+
+
+@media screen and (max-width: 728px) {
+
+    aside {
+        /* display:none; */
+    }
+
+
+}
