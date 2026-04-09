@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Checkout | Leña y Sabor</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+  <link href="css/styles.css" rel="stylesheet"/>
+</head>
+<body data-page="checkout">
+
+  <div id="toast-container" class="toast-container-lys"></div>
+
+  <!-- navbar minima -->
+  <nav class="lys-navbar navbar fixed-top">
+    <div class="container-xl d-flex justify-content-between align-items-center">
+      <a class="navbar-brand" href="index.html">🔥 Leña y Sabor</a>
+      <div style="font-size:0.82rem;color:var(--on-muted);">
+        🔒 Pago Seguro
+      </div>
+    </div>
+  </nav>
+
+  <main style="padding-top:90px;padding-bottom:4rem;">
+    <div class="container-xl" style="max-width:980px;">
+      <h1 class="section-title mb-1">Finalizar <span class="accent">Pedido</span></h1>
+      <div class="section-divider"></div>
+
+      <!-- pasos -->
+      <div class="d-flex gap-3 align-items-center mb-4">
+        <div class="checkout-step">
+          <div class="step-circle done">✓</div>
+          <span class="step-label" style="color:var(--secondary)">Carrito</span>
+        </div>
+        <div style="flex:1;height:2px;background:var(--primary-cta);border-radius:2px;"></div>
+        <div class="checkout-step">
+          <div class="step-circle current">2</div>
+          <span class="step-label">Datos de Entrega</span>
+        </div>
+        <div style="flex:1;height:2px;background:var(--surface-highest);border-radius:2px;"></div>
+        <div class="checkout-step">
+          <div class="step-circle pending">3</div>
+          <span class="step-label" style="color:var(--on-muted)">Confirmacion</span>
+        </div>
+      </div>
+
+      <div class="row g-4">
+        <!-- formulario de envio -->
+        <div class="col-12 col-lg-7">
+          <div style="background:var(--surface-mid);border-radius:var(--radius-card);padding:2rem;">
+            <h2 style="font-family:var(--font-head);font-size:1.2rem;font-weight:800;margin-bottom:1.5rem;">
+              Datos de Entrega
+            </h2>
+            <form id="form-checkout" novalidate>
+              <div class="row g-3">
+                <div class="col-12 col-md-6">
+                  <label class="form-label-lys">Nombre Completo *</label>
+                  <input id="co-nombre" type="text" class="form-control-lys" placeholder="Juan Perez" required/>
+                </div>
+                <div class="col-12 col-md-6">
+                  <label class="form-label-lys">Telefono *</label>
+                  <input id="co-telefono" type="tel" class="form-control-lys" placeholder="999-999-999" required/>
+                </div>
+                <div class="col-12">
+                  <label class="form-label-lys">Direccion de Entrega *</label>
+                  <input id="co-direccion" type="text" class="form-control-lys" placeholder="Av. Ejemplo 1234, Distrito, Lima" required/>
+                </div>
+                <div class="col-12 col-md-6">
+                  <label class="form-label-lys">Distrito</label>
+                  <input id="co-distrito" type="text" class="form-control-lys" placeholder="Miraflores"/>
+                </div>
+                <div class="col-12 col-md-6">
+                  <label class="form-label-lys">Referencia</label>
+                  <input id="co-referencia" type="text" class="form-control-lys" placeholder="Frente al parque..."/>
+                </div>
+              </div>
+
+              <!-- metodo de pago -->
+              <h2 style="font-family:var(--font-head);font-size:1.2rem;font-weight:800;margin:2rem 0 1.2rem;">
+                Metodo de Pago
+              </h2>
+              <div class="row g-2 mb-3">
+                <!-- opciones de pago tipo radio estilizado -->
+                <div class="col-6 col-md-3">
+                  <label style="cursor:pointer;display:block;">
+                    <input type="radio" name="pago" value="tarjeta" style="display:none;" onchange="selPago(this)"/>
+                    <div class="pago-option" style="background:var(--surface-high);border-radius:0.6rem;padding:0.8rem;text-align:center;border:2px solid transparent;transition:var(--transition);">
+                      <div style="font-size:1.5rem;">💳</div>
+                      <div style="font-size:0.75rem;font-weight:700;margin-top:0.3rem;">Tarjeta</div>
+                    </div>
+                  </label>
+                </div>
+                <div class="col-6 col-md-3">
+                  <label style="cursor:pointer;display:block;">
+                    <input type="radio" name="pago" value="yape" style="display:none;" onchange="selPago(this)"/>
+                    <div class="pago-option" style="background:var(--surface-high);border-radius:0.6rem;padding:0.8rem;text-align:center;border:2px solid transparent;transition:var(--transition);">
+                      <div style="font-size:1.5rem;">📱</div>
+                      <div style="font-size:0.75rem;font-weight:700;margin-top:0.3rem;">Yape/Plin</div>
+                    </div>
+                  </label>
+                </div>
+                <div class="col-6 col-md-3">
+                  <label style="cursor:pointer;display:block;">
+                    <input type="radio" name="pago" value="efectivo" style="display:none;" onchange="selPago(this)"/>
+                    <div class="pago-option" style="background:var(--surface-high);border-radius:0.6rem;padding:0.8rem;text-align:center;border:2px solid transparent;transition:var(--transition);">
+                      <div style="font-size:1.5rem;">💵</div>
+                      <div style="font-size:0.75rem;font-weight:700;margin-top:0.3rem;">Efectivo</div>
+                    </div>
+                  </label>
+                </div>
+                <div class="col-6 col-md-3">
+                  <label style="cursor:pointer;display:block;">
+                    <input type="radio" name="pago" value="transferencia" style="display:none;" onchange="selPago(this)"/>
+                    <div class="pago-option" style="background:var(--surface-high);border-radius:0.6rem;padding:0.8rem;text-align:center;border:2px solid transparent;transition:var(--transition);">
+                      <div style="font-size:1.5rem;">🏦</div>
+                      <div style="font-size:0.75rem;font-weight:700;margin-top:0.3rem;">Transferencia</div>
+                    </div>
+                  </label>
+                </div>
+              </div>
+
+              <!-- campo oculto para metodo -->
+              <input id="co-metodo" type="hidden" value="" required/>
+
+              <div class="mt-1" id="pago-error" style="color:var(--primary);font-size:0.82rem;display:none;">
+                Selecciona un metodo de pago
+              </div>
+
+              <!-- notas -->
+              <div class="mt-3">
+                <label class="form-label-lys">Notas adicionales (opcional)</label>
+                <textarea class="form-control-lys" rows="2" placeholder="Sin salsa picante, guardar en la puerta..."></textarea>
+              </div>
+
+              <button type="submit" class="btn-brasa w-100 mt-4" style="justify-content:center;font-size:1.05rem;">
+                <span class="material-icons" style="font-size:1.1rem;">check_circle</span>
+                Confirmar Pedido
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- resumen -->
+        <div class="col-12 col-lg-5">
+          <div class="cart-summary">
+            <div class="cart-summary-title">Tu Pedido</div>
+            <div id="checkout-resumen">
+              <div style="color:var(--on-muted);font-size:0.88rem;text-align:center;padding:2rem 0;">
+                Cargando resumen...
+              </div>
+            </div>
+            <div style="margin-top:1.5rem;padding:1rem;background:var(--surface-high);border-radius:0.5rem;font-size:0.8rem;color:var(--on-muted);">
+              ⏱ Tiempo estimado de entrega: <strong style="color:var(--secondary);">30–45 min</strong><br/>
+              📍 Solo entregamos en Lima Metropolitana
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/model.js"></script>
+  <script src="js/view.js"></script>
+  <script src="js/controller.js"></script>
+  <script>
+    function selPago(radio) {
+      document.getElementById('co-metodo').value = radio.value;
+      document.querySelectorAll('.pago-option').forEach(el => {
+        el.style.borderColor = 'transparent';
+        el.style.background  = 'var(--surface-high)';
+      });
+      const target = radio.nextElementSibling;
+      target.style.borderColor = 'var(--primary-cta)';
+      target.style.background  = 'rgba(235,0,0,0.1)';
+      document.getElementById('pago-error').style.display = 'none';
+    }
+  </script>
+</body>
+</html>

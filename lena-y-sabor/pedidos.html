@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mis Pedidos | Leña y Sabor</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+  <link href="css/styles.css" rel="stylesheet"/>
+</head>
+<body data-page="pedidos">
+
+  <div id="toast-container" class="toast-container-lys"></div>
+
+  <!-- navbar -->
+  <nav class="lys-navbar navbar navbar-expand-lg fixed-top">
+    <div class="container-xl">
+      <a class="navbar-brand" href="index.html">🔥 Leña y Sabor</a>
+      <button id="navbar-toggler" class="navbar-toggler" type="button">
+        <span class="material-icons" style="color:var(--on-muted)">menu</span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbar-menu">
+        <ul class="navbar-nav ms-auto gap-lg-4 mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="menu.html">Menu</a></li>
+          <li class="nav-item"><a class="nav-link active" href="pedidos.html">Pedidos</a></li>
+        </ul>
+        <div class="d-flex align-items-center gap-2 ms-lg-4 mt-2 mt-lg-0">
+          <button id="nav-cart-btn" class="nav-icon-btn position-relative">
+            <span class="material-icons">shopping_cart</span>
+            <span class="cart-count cart-badge" style="display:none">0</span>
+          </button>
+          <button id="nav-perfil-btn" class="nav-icon-btn">
+            <span class="material-icons">account_circle</span>
+          </button>
+          <a href="login.html" class="show-guest btn-ghost-lys" style="font-size:0.82rem;padding:0.4rem 1rem;">Ingresar</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main style="padding-top:90px;padding-bottom:4rem;">
+    <div class="container-xl" style="max-width:760px;">
+      <div class="section-tag mt-3">Seguimiento</div>
+      <h1 class="section-title mb-1">Mis <span class="accent">Pedidos</span></h1>
+      <div class="section-divider"></div>
+
+      <!-- filtros de estado -->
+      <div class="d-flex gap-2 flex-wrap mb-4">
+        <button class="category-chip active" onclick="filtrarPedidos('todos', this)">Todos</button>
+        <button class="category-chip" onclick="filtrarPedidos('pendiente', this)">Pendientes</button>
+        <button class="category-chip" onclick="filtrarPedidos('preparando', this)">En Preparacion</button>
+        <button class="category-chip" onclick="filtrarPedidos('entregado', this)">Entregados</button>
+      </div>
+
+      <!-- lista de pedidos -->
+      <div id="pedidos-list">
+        <div class="text-center py-5">
+          <div style="color:var(--on-muted)">Cargando pedidos...</div>
+        </div>
+      </div>
+
+      <!-- boton pedir de nuevo -->
+      <div class="text-center mt-4">
+        <a href="menu.html" class="btn-brasa">
+          <span class="material-icons" style="font-size:1.1rem;">add_shopping_cart</span>
+          Hacer un Nuevo Pedido
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/model.js"></script>
+  <script src="js/view.js"></script>
+  <script src="js/controller.js"></script>
+  <script>
+    function filtrarPedidos(estado, btn) {
+      document.querySelectorAll('.category-chip').forEach(c => c.classList.remove('active'));
+      btn.classList.add('active');
+      const container = document.getElementById('pedidos-list');
+      let pedidos = Model.getPedidos();
+      if (estado !== 'todos') {
+        pedidos = pedidos.filter(p => p.estado === estado);
+      }
+      if (pedidos.length === 0) {
+        container.innerHTML = View.renderEmptyState('📦', 'Sin pedidos', 'No hay pedidos en este estado.');
+        return;
+      }
+      container.innerHTML = pedidos.reverse().map(p => View.renderOrderCard(p)).join('');
+    }
+  </script>
+</body>
+</html>

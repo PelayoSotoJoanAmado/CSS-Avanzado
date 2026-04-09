@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Leña y Sabor – El Corazon de la Brasa</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+  <link href="css/styles.css" rel="stylesheet"/>
+</head>
+<body data-page="index">
+
+  <!-- toast container -->
+  <div id="toast-container" class="toast-container-lys"></div>
+
+  <!-- navbar -->
+  <nav class="lys-navbar navbar navbar-expand-lg fixed-top">
+    <div class="container-xl">
+      <a class="navbar-brand" href="index.html">🔥 Leña y Sabor</a>
+      <button id="navbar-toggler" class="navbar-toggler" type="button">
+        <span class="material-icons" style="color:var(--on-muted)">menu</span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbar-menu">
+        <ul class="navbar-nav ms-auto gap-lg-4 mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link active" href="index.html">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="menu.html">Menu</a></li>
+          <li class="nav-item"><a class="nav-link" href="promociones.html">Promociones</a></li>
+          <li class="nav-item"><a class="nav-link" href="pedidos.html">Pedidos</a></li>
+        </ul>
+        <div class="d-flex align-items-center gap-2 ms-lg-4 mt-2 mt-lg-0">
+          <!-- boton carrito -->
+          <button id="nav-cart-btn" class="nav-icon-btn position-relative">
+            <span class="material-icons">shopping_cart</span>
+            <span class="cart-count cart-badge" style="display:none">0</span>
+          </button>
+          <!-- boton perfil -->
+          <button id="nav-perfil-btn" class="nav-icon-btn">
+            <span class="material-icons">account_circle</span>
+          </button>
+          <!-- nombre usuario (si esta logueado) -->
+          <span class="show-logged d-none" style="font-size:0.82rem;color:var(--secondary);">
+            <span class="nav-user-name"></span>
+          </span>
+          <a href="login.html" class="show-guest btn-ghost-lys" style="font-size:0.82rem;padding:0.4rem 1rem;">Ingresar</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- hero section -->
+  <section class="hero-section">
+    <div class="hero-bg">
+      <img
+        src="https://images.unsplash.com/photo-1598103442097-8b74394b95c3?auto=format&fit=crop&w=1400&q=85"
+        alt="Pollo a la brasa peruano"
+        onerror="this.src='https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?auto=format&fit=crop&w=1400&q=85'"
+      />
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-overlay-bottom"></div>
+
+    <div class="container-xl hero-content">
+      <div class="row">
+        <div class="col-12 col-lg-7">
+          <div class="hero-tag">Tradicion a la Brasa</div>
+          <h1 class="hero-title">
+            El Corazon<br/>
+            <span class="highlight">de la Brasa</span>
+          </h1>
+          <p class="hero-subtitle">
+            Experimenta el sabor autentico del pollo a la brasa peruano, marinado con secretos ancestrales y cocinado a la perfeccion con lena seleccionada.
+          </p>
+          <div class="d-flex flex-wrap gap-3">
+            <button id="btn-pedir-ahora" class="btn-brasa">
+              <span class="material-icons" style="font-size:1.1rem">local_fire_department</span>
+              Pedir Ahora
+            </button>
+            <button id="btn-ver-menu" class="btn-secondary-lys">
+              Ver Menu Completo
+            </button>
+          </div>
+          <!-- stats rapidas -->
+          <div class="d-flex gap-4 mt-4 pt-2">
+            <div>
+              <div style="font-family:var(--font-head);font-size:1.8rem;font-weight:900;color:var(--secondary)">15+</div>
+              <div style="font-size:0.78rem;color:var(--on-muted);">Anos de sabor</div>
+            </div>
+            <div style="width:1px;background:rgba(255,255,255,0.08);"></div>
+            <div>
+              <div style="font-family:var(--font-head);font-size:1.8rem;font-weight:900;color:var(--secondary)">4.9★</div>
+              <div style="font-size:0.78rem;color:var(--on-muted);">Calificacion</div>
+            </div>
+            <div style="width:1px;background:rgba(255,255,255,0.08);"></div>
+            <div>
+              <div style="font-family:var(--font-head);font-size:1.8rem;font-weight:900;color:var(--secondary)">10K+</div>
+              <div style="font-size:0.78rem;color:var(--on-muted);">Clientes felices</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- categorias rapidas -->
+  <section class="section-pad" style="padding-top:3rem;padding-bottom:3rem;">
+    <div class="container-xl">
+      <div class="d-flex flex-wrap gap-3 justify-content-center">
+        <a href="menu.html?cat=pollo" class="promo-chip-link" style="text-decoration:none;">
+          <div style="background:var(--surface-mid);border-radius:var(--radius-card);padding:1.2rem 2rem;text-align:center;transition:var(--transition);" onmouseover="this.style.background='var(--surface-high)'" onmouseout="this.style.background='var(--surface-mid)'">
+            <div style="font-size:2rem;margin-bottom:0.3rem;">🍗</div>
+            <div style="font-family:var(--font-head);font-weight:800;font-size:0.95rem;color:var(--on-surface);">Pollos</div>
+          </div>
+        </a>
+        <a href="menu.html?cat=combos" style="text-decoration:none;">
+          <div style="background:var(--surface-mid);border-radius:var(--radius-card);padding:1.2rem 2rem;text-align:center;transition:var(--transition);" onmouseover="this.style.background='var(--surface-high)'" onmouseout="this.style.background='var(--surface-mid)'">
+            <div style="font-size:2rem;margin-bottom:0.3rem;">🎁</div>
+            <div style="font-family:var(--font-head);font-weight:800;font-size:0.95rem;color:var(--on-surface);">Combos</div>
+          </div>
+        </a>
+        <a href="menu.html?cat=acompanantes" style="text-decoration:none;">
+          <div style="background:var(--surface-mid);border-radius:var(--radius-card);padding:1.2rem 2rem;text-align:center;transition:var(--transition);" onmouseover="this.style.background='var(--surface-high)'" onmouseout="this.style.background='var(--surface-mid)'">
+            <div style="font-size:2rem;margin-bottom:0.3rem;">🍟</div>
+            <div style="font-family:var(--font-head);font-weight:800;font-size:0.95rem;color:var(--on-surface);">Acompanantes</div>
+          </div>
+        </a>
+        <a href="menu.html?cat=bebidas" style="text-decoration:none;">
+          <div style="background:var(--surface-mid);border-radius:var(--radius-card);padding:1.2rem 2rem;text-align:center;transition:var(--transition);" onmouseover="this.style.background='var(--surface-high)'" onmouseout="this.style.background='var(--surface-mid)'">
+            <div style="font-size:2rem;margin-bottom:0.3rem;">🥤</div>
+            <div style="font-family:var(--font-head);font-weight:800;font-size:0.95rem;color:var(--on-surface);">Bebidas</div>
+          </div>
+        </a>
+        <a href="menu.html?cat=postres" style="text-decoration:none;">
+          <div style="background:var(--surface-mid);border-radius:var(--radius-card);padding:1.2rem 2rem;text-align:center;transition:var(--transition);" onmouseover="this.style.background='var(--surface-high)'" onmouseout="this.style.background='var(--surface-mid)'">
+            <div style="font-size:2rem;margin-bottom:0.3rem;">🍮</div>
+            <div style="font-family:var(--font-head);font-weight:800;font-size:0.95rem;color:var(--on-surface);">Postres</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- promo banner -->
+  <section style="padding:0 0 4rem;">
+    <div class="container-xl">
+      <div class="promo-card" style="height:280px;">
+        <img src="https://images.unsplash.com/photo-1611599537845-1c7aca0091c0?auto=format&fit=crop&w=1200&q=80" alt="Combo familiar"/>
+        <div class="promo-card-overlay"></div>
+        <div class="promo-card-body d-flex align-items-end justify-content-between flex-wrap gap-3">
+          <div>
+            <span class="promo-badge">Oferta del Dia</span>
+            <div class="promo-title" style="font-size:1.8rem;">Combo Familiar Brasa</div>
+            <div style="color:var(--on-muted);font-size:0.9rem;margin-top:0.3rem;">Pollo entero + 4 papas + 4 ensaladas + 2 gaseosas</div>
+            <div class="mt-2">
+              <span class="promo-price">S/ 89.00</span>
+              <span class="promo-price-old">S/ 110.00</span>
+            </div>
+          </div>
+          <button class="btn-brasa" onclick="window.location.href='menu.html'">
+            Ver Oferta
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- productos destacados -->
+  <section class="section-pad" style="padding-top:0;">
+    <div class="container-xl">
+      <div class="d-flex justify-content-between align-items-end mb-4">
+        <div>
+          <div class="section-tag">Lo mas pedido</div>
+          <h2 class="section-title">Favoritos de la <span class="accent">Brasa</span></h2>
+          <div class="section-divider"></div>
+        </div>
+        <a href="menu.html" class="btn-ghost-lys" style="font-size:0.85rem;">Ver todo →</a>
+      </div>
+      <div id="productos-destacados">
+        <!-- renderizado por JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- por que elegirnos -->
+  <section style="background:var(--surface-low);padding:4rem 0;">
+    <div class="container-xl">
+      <div class="row text-center g-4">
+        <div class="col-6 col-md-3">
+          <div style="font-size:2.5rem;margin-bottom:0.7rem;">🔥</div>
+          <div style="font-family:var(--font-head);font-weight:800;font-size:1rem;margin-bottom:0.3rem;">A la Lena</div>
+          <div style="color:var(--on-muted);font-size:0.82rem;">Cocido con lena seleccionada para el sabor perfecto</div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div style="font-size:2.5rem;margin-bottom:0.7rem;">⚡</div>
+          <div style="font-family:var(--font-head);font-weight:800;font-size:1rem;margin-bottom:0.3rem;">Delivery Rapido</div>
+          <div style="color:var(--on-muted);font-size:0.82rem;">Entregamos en 30-45 minutos a tu puerta</div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div style="font-size:2.5rem;margin-bottom:0.7rem;">🌿</div>
+          <div style="font-family:var(--font-head);font-weight:800;font-size:1rem;margin-bottom:0.3rem;">Ingredientes Frescos</div>
+          <div style="color:var(--on-muted);font-size:0.82rem;">Insumos frescos seleccionados cada dia</div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div style="font-size:2.5rem;margin-bottom:0.7rem;">💳</div>
+          <div style="font-family:var(--font-head);font-weight:800;font-size:1rem;margin-bottom:0.3rem;">Pago Facil</div>
+          <div style="color:var(--on-muted);font-size:0.82rem;">Yape, Plin, tarjeta o efectivo</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- footer -->
+  <footer class="lys-footer">
+    <div class="container-xl">
+      <div class="row g-4">
+        <div class="col-12 col-md-4">
+          <div class="footer-brand">🔥 Leña y Sabor</div>
+          <div class="footer-tagline">El autentico sabor del pollo a la brasa peruano desde 2008.</div>
+          <div style="color:var(--on-muted);font-size:0.82rem;">
+            📍 Av. La Marina 1234, San Miguel, Lima<br/>
+            📞 (01) 234-5678<br/>
+            📧 hola@lenaYsabor.pe
+          </div>
+        </div>
+        <div class="col-6 col-md-2">
+          <div class="footer-title">Menu</div>
+          <a href="menu.html" class="footer-link">Pollos</a>
+          <a href="menu.html" class="footer-link">Combos</a>
+          <a href="menu.html" class="footer-link">Acompanantes</a>
+          <a href="menu.html" class="footer-link">Bebidas</a>
+          <a href="menu.html" class="footer-link">Postres</a>
+        </div>
+        <div class="col-6 col-md-2">
+          <div class="footer-title">Cuenta</div>
+          <a href="login.html"    class="footer-link">Iniciar Sesion</a>
+          <a href="register.html" class="footer-link">Registrarse</a>
+          <a href="pedidos.html"  class="footer-link">Mis Pedidos</a>
+          <a href="perfil.html"   class="footer-link">Mi Perfil</a>
+        </div>
+        <div class="col-12 col-md-4">
+          <div class="footer-title">Horario de Atencion</div>
+          <div style="color:var(--on-muted);font-size:0.85rem;line-height:2;">
+            Lunes – Viernes: 12:00 pm – 10:00 pm<br/>
+            Sabado: 11:00 am – 11:00 pm<br/>
+            Domingo: 11:00 am – 10:00 pm
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom d-flex justify-content-between flex-wrap gap-2">
+        <span>© 2025 Leña y Sabor. Todos los derechos reservados.</span>
+        <span>Hecho con 🔥 en Lima, Peru</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/model.js"></script>
+  <script src="js/view.js"></script>
+  <script src="js/controller.js"></script>
+</body>
+</html>

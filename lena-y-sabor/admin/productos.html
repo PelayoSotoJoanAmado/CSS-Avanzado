@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Productos Admin | Leña y Sabor</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+  <link href="../css/styles.css" rel="stylesheet"/>
+</head>
+<body data-page="admin-productos" style="overflow-x:hidden;">
+
+  <div id="toast-container" class="toast-container-lys"></div>
+
+  <!-- sidebar -->
+  <aside class="admin-sidebar" id="admin-sidebar">
+    <div class="sidebar-brand">🔥 Leña y Sabor
+      <span style="font-size:0.58rem;background:rgba(235,0,0,0.2);color:var(--primary);padding:0.15rem 0.4rem;border-radius:3px;margin-left:0.3rem;">ADMIN</span>
+    </div>
+    <div class="sidebar-section">Principal</div>
+    <a href="dashboard.html"     class="sidebar-link"><span class="material-icons">dashboard</span>Dashboard</a>
+    <a href="pedidos.html"       class="sidebar-link"><span class="material-icons">receipt_long</span>Pedidos</a>
+    <a href="productos.html"     class="sidebar-link active"><span class="material-icons">restaurant_menu</span>Productos</a>
+    <a href="inventario.html"    class="sidebar-link"><span class="material-icons">inventory_2</span>Inventario</a>
+    <div class="sidebar-section">Configuracion</div>
+    <a href="configuracion.html" class="sidebar-link"><span class="material-icons">settings</span>Ajustes</a>
+    <div style="margin-top:auto;padding:1rem;">
+      <a href="../index.html" class="sidebar-link" style="color:var(--secondary);"><span class="material-icons">storefront</span>Ver Tienda</a>
+      <button class="btn-logout sidebar-link" style="width:100%;background:none;border:none;cursor:pointer;color:var(--primary);">
+        <span class="material-icons">logout</span>Cerrar Sesion
+      </button>
+    </div>
+  </aside>
+
+  <!-- main -->
+  <div class="admin-main">
+    <div class="d-flex align-items-center justify-content-between gap-3 mb-4">
+      <div class="d-flex align-items-center gap-3">
+        <button id="sidebar-toggle" class="nav-icon-btn d-lg-none"><span class="material-icons">menu</span></button>
+        <div>
+          <h1 style="font-family:var(--font-head);font-size:1.5rem;font-weight:900;margin:0;">Gestion de Productos</h1>
+          <div style="color:var(--on-muted);font-size:0.78rem;">Agrega, edita o desactiva productos del menu</div>
+        </div>
+      </div>
+      <button id="btn-add-product" class="btn-brasa">
+        <span class="material-icons" style="font-size:1.1rem;">add</span> Nuevo Producto
+      </button>
+    </div>
+
+    <!-- filtros -->
+    <div style="background:var(--surface-mid);border-radius:var(--radius-card);padding:1.2rem;margin-bottom:1.5rem;">
+      <div class="d-flex flex-wrap gap-3 align-items-center">
+        <div class="position-relative" style="flex:1;min-width:200px;">
+          <span class="material-icons" style="position:absolute;left:0.7rem;top:50%;transform:translateY(-50%);color:var(--on-muted);font-size:1rem;">search</span>
+          <input type="text" placeholder="Buscar producto..." class="form-control-lys" style="padding-left:2.2rem;"
+                 oninput="buscarProducto(this.value)"/>
+        </div>
+        <div class="d-flex gap-2 flex-wrap">
+          <button class="category-chip active" onclick="filtrarCat('todos',this)">Todos</button>
+          <button class="category-chip" onclick="filtrarCat('pollo',this)">Pollos</button>
+          <button class="category-chip" onclick="filtrarCat('combos',this)">Combos</button>
+          <button class="category-chip" onclick="filtrarCat('acompanantes',this)">Acompanantes</button>
+          <button class="category-chip" onclick="filtrarCat('bebidas',this)">Bebidas</button>
+          <button class="category-chip" onclick="filtrarCat('postres',this)">Postres</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- tabla -->
+    <div style="background:var(--surface-mid);border-radius:var(--radius-card);padding:1.5rem;overflow-x:auto;">
+      <div id="admin-productos-tabla">
+        <div style="color:var(--on-muted);text-align:center;padding:2rem;">Cargando productos...</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- modal agregar/editar producto -->
+  <div class="modal fade" id="modalProducto" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content modal-content-lys">
+        <div class="modal-header modal-header-lys">
+          <h5 style="font-family:var(--font-head);font-weight:900;margin:0;" id="modal-titulo">Nuevo Producto</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body modal-body-lys">
+          <div class="row g-3">
+            <div class="col-12">
+              <label class="form-label-lys">Nombre del Producto</label>
+              <input id="mp-nombre" type="text" class="form-control-lys" placeholder="Ej: Pollo Entero"/>
+            </div>
+            <div class="col-6">
+              <label class="form-label-lys">Categoria</label>
+              <select id="mp-categoria" class="form-control-lys">
+                <option value="pollo">Pollo</option>
+                <option value="combos">Combos</option>
+                <option value="acompanantes">Acompanantes</option>
+                <option value="bebidas">Bebidas</option>
+                <option value="postres">Postres</option>
+              </select>
+            </div>
+            <div class="col-6">
+              <label class="form-label-lys">Precio (S/)</label>
+              <input id="mp-precio" type="number" class="form-control-lys" placeholder="0.00" step="0.50"/>
+            </div>
+            <div class="col-12">
+              <label class="form-label-lys">Descripcion</label>
+              <textarea id="mp-descripcion" class="form-control-lys" rows="2" placeholder="Describe el producto..."></textarea>
+            </div>
+            <div class="col-12">
+              <label class="form-label-lys">URL de Imagen</label>
+              <input id="mp-imagen" type="url" class="form-control-lys" placeholder="https://..."/>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer modal-footer-lys">
+          <button type="button" class="btn-ghost-lys" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn-brasa" onclick="guardarProducto()">Guardar Producto</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../js/model.js"></script>
+  <script src="../js/view.js"></script>
+  <script src="../js/controller.js"></script>
+  <script>
+    document.getElementById('sidebar-toggle')?.addEventListener('click', () => {
+      document.getElementById('admin-sidebar').classList.toggle('open');
+    });
+
+    document.getElementById('btn-add-product')?.addEventListener('click', () => {
+      document.getElementById('modal-titulo').textContent = 'Nuevo Producto';
+      new bootstrap.Modal(document.getElementById('modalProducto')).show();
+    });
+
+    function filtrarCat(cat, btn) {
+      document.querySelectorAll('.category-chip').forEach(c => c.classList.remove('active'));
+      btn.classList.add('active');
+      const prods = cat === 'todos' ? Model.getProductos() : Model.getProductosPorCategoria(cat);
+      renderTabla(prods);
+    }
+
+    function buscarProducto(q) {
+      const prods = Model.getProductos().filter(p =>
+        p.nombre.toLowerCase().includes(q.toLowerCase()) ||
+        p.categoria.toLowerCase().includes(q.toLowerCase())
+      );
+      renderTabla(prods);
+    }
+
+    function renderTabla(prods) {
+      const container = document.getElementById('admin-productos-tabla');
+      if (prods.length === 0) {
+        container.innerHTML = '<div style="color:var(--on-muted);text-align:center;padding:2rem;">Sin resultados.</div>';
+        return;
+      }
+      const rows = prods.map(p => View.renderProductRow(p)).join('');
+      container.innerHTML = `
+        <table class="admin-table">
+          <thead><tr>
+            <th>Imagen</th><th>Nombre</th><th>Categoria</th><th>Precio</th><th>Estado</th><th>Acciones</th>
+          </tr></thead>
+          <tbody>${rows}</tbody>
+        </table>`;
+    }
+
+    function guardarProducto() {
+      const nombre = document.getElementById('mp-nombre').value.trim();
+      if (!nombre) { View.showToast('El nombre es obligatorio','error'); return; }
+      bootstrap.Modal.getInstance(document.getElementById('modalProducto')).hide();
+      View.showToast(`Producto "${nombre}" guardado (simulado)`, 'success');
+    }
+  </script>
+</body>
+</html>

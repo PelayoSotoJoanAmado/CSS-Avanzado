@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Iniciar Sesion | Leña y Sabor</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+  <link href="css/styles.css" rel="stylesheet"/>
+</head>
+<body data-page="login">
+
+  <div id="toast-container" class="toast-container-lys"></div>
+
+  <!-- fondo con imagen -->
+  <div style="position:fixed;inset:0;z-index:-1;">
+    <img src="https://images.unsplash.com/photo-1598103442097-8b74394b95c3?auto=format&fit=crop&w=1400&q=80"
+         alt="" style="width:100%;height:100%;object-fit:cover;opacity:0.12;"/>
+  </div>
+  <div style="position:fixed;inset:0;z-index:-1;background:radial-gradient(at 30% 50%, rgba(235,0,0,0.08) 0, transparent 60%);"></div>
+
+  <!-- navbar minima -->
+  <nav style="padding:1rem 2rem;display:flex;align-items:center;gap:1rem;">
+    <a href="index.html" style="color:var(--on-muted);display:flex;align-items:center;gap:0.3rem;font-size:0.88rem;">
+      <span class="material-icons" style="font-size:1rem;">arrow_back</span> Volver
+    </a>
+    <a class="navbar-brand ms-auto" href="index.html" style="font-family:var(--font-head);font-weight:900;font-size:1.2rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--primary);">
+      🔥 Leña y Sabor
+    </a>
+  </nav>
+
+  <!-- formulario de login -->
+  <main class="d-flex justify-content-center align-items-center" style="min-height:calc(100vh - 80px);padding:2rem 1rem;">
+    <div class="form-card fade-up">
+      <div class="text-center mb-4">
+        <div style="font-size:3rem;margin-bottom:0.5rem;">🔥</div>
+        <h1 class="form-title">Bienvenido</h1>
+        <p class="form-subtitle">Ingresa a tu cuenta para continuar</p>
+      </div>
+
+      <!-- demo credenciales -->
+      <div style="background:rgba(235,191,140,0.08);border-radius:0.5rem;padding:0.8rem 1rem;margin-bottom:1.5rem;font-size:0.8rem;color:var(--on-muted);">
+        <strong style="color:var(--secondary);">Demo:</strong>
+        Admin: <code style="color:var(--primary);">carlos@demo.com</code> / <code style="color:var(--primary);">123456</code><br/>
+        Cliente: <code style="color:var(--primary);">maria@demo.com</code> / <code style="color:var(--primary);">123456</code>
+      </div>
+
+      <form id="form-login" novalidate>
+        <div class="mb-3">
+          <label class="form-label-lys">Correo Electronico</label>
+          <input id="login-email" type="email" class="form-control-lys" placeholder="tu@correo.com" required/>
+        </div>
+        <div class="mb-4">
+          <label class="form-label-lys">Contrasena</label>
+          <div class="position-relative">
+            <input id="login-password" type="password" class="form-control-lys" placeholder="••••••••" required/>
+            <button type="button" onclick="togglePass('login-password',this)"
+              style="position:absolute;right:0.75rem;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--on-muted);cursor:pointer;">
+              <span class="material-icons" style="font-size:1.1rem;">visibility</span>
+            </button>
+          </div>
+        </div>
+        <button type="submit" class="btn-brasa w-100" style="justify-content:center;">
+          Iniciar Sesion
+        </button>
+      </form>
+
+      <div class="form-divider">o</div>
+
+      <div class="text-center">
+        <span style="color:var(--on-muted);font-size:0.88rem;">¿No tienes cuenta?</span>
+        <a href="register.html" style="color:var(--secondary);font-weight:700;margin-left:0.4rem;">Registrarse</a>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/model.js"></script>
+  <script src="js/view.js"></script>
+  <script src="js/controller.js"></script>
+  <script>
+    function togglePass(inputId, btn) {
+      const input = document.getElementById(inputId);
+      const icon  = btn.querySelector('.material-icons');
+      if (input.type === 'password') {
+        input.type = 'text';
+        icon.textContent = 'visibility_off';
+      } else {
+        input.type = 'password';
+        icon.textContent = 'visibility';
+      }
+    }
+  </script>
+</body>
+</html>

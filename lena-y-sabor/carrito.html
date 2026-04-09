@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Carrito | Leña y Sabor</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+  <link href="css/styles.css" rel="stylesheet"/>
+</head>
+<body data-page="carrito">
+
+  <div id="toast-container" class="toast-container-lys"></div>
+
+  <!-- navbar -->
+  <nav class="lys-navbar navbar navbar-expand-lg fixed-top">
+    <div class="container-xl">
+      <a class="navbar-brand" href="index.html">🔥 Leña y Sabor</a>
+      <button id="navbar-toggler" class="navbar-toggler" type="button">
+        <span class="material-icons" style="color:var(--on-muted)">menu</span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbar-menu">
+        <ul class="navbar-nav ms-auto gap-lg-4 mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="menu.html">Menu</a></li>
+          <li class="nav-item"><a class="nav-link" href="pedidos.html">Pedidos</a></li>
+        </ul>
+        <div class="d-flex align-items-center gap-2 ms-lg-4 mt-2 mt-lg-0">
+          <button id="nav-cart-btn" class="nav-icon-btn position-relative">
+            <span class="material-icons">shopping_cart</span>
+            <span class="cart-count cart-badge" style="display:none">0</span>
+          </button>
+          <button id="nav-perfil-btn" class="nav-icon-btn">
+            <span class="material-icons">account_circle</span>
+          </button>
+          <a href="login.html" class="show-guest btn-ghost-lys" style="font-size:0.82rem;padding:0.4rem 1rem;">Ingresar</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main style="padding-top:90px;padding-bottom:4rem;">
+    <div class="container-xl">
+      <!-- breadcrumb -->
+      <div style="color:var(--on-muted);font-size:0.82rem;margin-bottom:1.5rem;">
+        <a href="index.html" style="color:var(--on-muted);">Inicio</a>
+        <span class="mx-2">/</span>
+        <span style="color:var(--secondary);">Carrito</span>
+      </div>
+
+      <h1 class="section-title mb-1">Tu <span class="accent">Carrito</span></h1>
+      <div class="section-divider"></div>
+
+      <div class="row g-4">
+        <!-- items del carrito -->
+        <div class="col-12 col-lg-8">
+
+          <!-- boton seguir comprando -->
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <a href="menu.html" class="btn-ghost-lys" style="font-size:0.85rem;">
+              ← Seguir comprando
+            </a>
+            <button id="btn-vaciar-carrito" class="btn-danger-lys">
+              Vaciar carrito
+            </button>
+          </div>
+
+          <!-- lista de items (renderizado por JS) -->
+          <div id="carrito-items">
+            <div class="text-center py-5">
+              <div style="color:var(--on-muted)">Cargando carrito...</div>
+            </div>
+          </div>
+
+          <!-- sugerencias rapidas -->
+          <div class="mt-4" id="sugerencias-section">
+            <div style="font-family:var(--font-head);font-weight:800;font-size:1rem;color:var(--on-surface);margin-bottom:1rem;">
+              Agrega algo mas 👇
+            </div>
+            <div class="d-flex gap-3 flex-wrap">
+              <div style="background:var(--surface-mid);border-radius:var(--radius-card);padding:0.8rem 1.2rem;display:flex;align-items:center;gap:0.8rem;cursor:pointer;transition:var(--transition);"
+                   onmouseover="this.style.background='var(--surface-high)'" onmouseout="this.style.background='var(--surface-mid)'"
+                   onclick="quickAdd(6)">
+                <img src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=80&q=80"
+                     style="width:50px;height:50px;object-fit:cover;border-radius:0.4rem;" alt="papas"/>
+                <div>
+                  <div style="font-weight:700;font-size:0.88rem;">Papas Grandes</div>
+                  <div style="color:var(--secondary);font-weight:800;font-size:0.82rem;">S/ 12.00</div>
+                </div>
+                <button class="btn-add-cart ms-auto" data-id="6" onclick="event.stopPropagation()">+</button>
+              </div>
+              <div style="background:var(--surface-mid);border-radius:var(--radius-card);padding:0.8rem 1.2rem;display:flex;align-items:center;gap:0.8rem;cursor:pointer;transition:var(--transition);"
+                   onmouseover="this.style.background='var(--surface-high)'" onmouseout="this.style.background='var(--surface-mid)'"
+                   onclick="quickAdd(9)">
+                <img src="https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=80&q=80"
+                     style="width:50px;height:50px;object-fit:cover;border-radius:0.4rem;" alt="gaseosa"/>
+                <div>
+                  <div style="font-weight:700;font-size:0.88rem;">Gaseosa</div>
+                  <div style="color:var(--secondary);font-weight:800;font-size:0.82rem;">S/ 5.00</div>
+                </div>
+                <button class="btn-add-cart ms-auto" data-id="9" onclick="event.stopPropagation()">+</button>
+              </div>
+              <div style="background:var(--surface-mid);border-radius:var(--radius-card);padding:0.8rem 1.2rem;display:flex;align-items:center;gap:0.8rem;cursor:pointer;transition:var(--transition);"
+                   onmouseover="this.style.background='var(--surface-high)'" onmouseout="this.style.background='var(--surface-mid)'"
+                   onclick="quickAdd(12)">
+                <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=80&q=80"
+                     style="width:50px;height:50px;object-fit:cover;border-radius:0.4rem;" alt="postre"/>
+                <div>
+                  <div style="font-weight:700;font-size:0.88rem;">Tres Leches</div>
+                  <div style="color:var(--secondary);font-weight:800;font-size:0.82rem;">S/ 10.00</div>
+                </div>
+                <button class="btn-add-cart ms-auto" data-id="12" onclick="event.stopPropagation()">+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- resumen del pedido -->
+        <div class="col-12 col-lg-4" id="carrito-resumen" style="display:none;">
+          <div class="cart-summary">
+            <div class="cart-summary-title">Resumen del Pedido</div>
+
+            <div class="summary-row">
+              <span>Subtotal</span>
+              <span id="cart-subtotal">S/ 0.00</span>
+            </div>
+            <div class="summary-row">
+              <span>Costo de Delivery</span>
+              <span id="cart-delivery">S/ 5.00</span>
+            </div>
+            <div class="summary-row total">
+              <span>Total a Pagar</span>
+              <span id="cart-total">S/ 5.00</span>
+            </div>
+
+            <div style="margin-top:1.5rem;">
+              <button id="btn-checkout" class="btn-brasa w-100" style="justify-content:center;font-size:1.05rem;">
+                <span class="material-icons" style="font-size:1.1rem;">local_shipping</span>
+                Proceder al Pago
+              </button>
+              <div style="text-align:center;margin-top:0.8rem;font-size:0.78rem;color:var(--on-muted);">
+                🔒 Pago 100% seguro
+              </div>
+            </div>
+
+            <!-- metodos de pago -->
+            <div style="margin-top:1.5rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,0.05);">
+              <div style="font-size:0.72rem;color:var(--on-muted);text-align:center;margin-bottom:0.7rem;letter-spacing:0.1em;text-transform:uppercase;">Aceptamos</div>
+              <div class="d-flex justify-content-center gap-2 flex-wrap">
+                <span style="background:var(--surface-high);border-radius:0.4rem;padding:0.3rem 0.6rem;font-size:0.75rem;font-weight:700;">💳 Visa</span>
+                <span style="background:var(--surface-high);border-radius:0.4rem;padding:0.3rem 0.6rem;font-size:0.75rem;font-weight:700;">💳 MC</span>
+                <span style="background:var(--surface-high);border-radius:0.4rem;padding:0.3rem 0.6rem;font-size:0.75rem;font-weight:700;">📱 Yape</span>
+                <span style="background:var(--surface-high);border-radius:0.4rem;padding:0.3rem 0.6rem;font-size:0.75rem;font-weight:700;">💰 Efectivo</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/model.js"></script>
+  <script src="js/view.js"></script>
+  <script src="js/controller.js"></script>
+  <script>
+    function quickAdd(id) {
+      Model.addToCarrito(id);
+      View.updateCartBadge(Model.getCantidadCarrito());
+      const prod = Model.getProductoById(id);
+      View.showToast(`${prod.nombre} agregado`, 'success');
+      // re-renderiza el carrito
+      Controller.init && location.reload();
+    }
+  </script>
+</body>
+</html>
