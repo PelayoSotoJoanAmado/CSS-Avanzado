@@ -1,0 +1,89 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+.contenedor {
+    background-color: aquamarine;
+    display: grid;
+    gap: 1rem;
+    padding: 0.5rem;
+    /* height: 100vh; */
+
+    grid-template-areas: 
+    "header header header"
+    "sidebar nav nav"
+    "sidebar main main"
+    "sidebar aside aside"
+    "footer footer footer";
+
+    grid-template-columns: 250px repeat(2, 1fr);
+    grid-template-rows: 50px 50px 1fr 1fr 50px;
+
+}
+
+
+.item {
+    background-color: aqua;
+    margin: 0.5rem;
+    text-align: center;
+}
+
+.header {
+    grid-area: header;
+    background-color: rgb(189, 228, 127);
+    text-align: center;
+}
+
+.nav {
+    grid-area: nav;
+    background-color: darkgoldenrod;
+    text-align: center;
+}
+
+.main {
+    grid-area: main;
+    background-color: rgb(155, 110, 238);
+    text-align: center;
+}
+
+.sidebar {
+    grid-area: sidebar;
+    background-color: rgb(218, 101, 72);
+    text-align: center;
+}
+
+.aside {
+    grid-area: aside;
+    background-color: rgb(153, 86, 106);
+    text-align: center;
+}
+
+.footer {
+    grid-area: footer;
+    background-color: aqua;
+    text-align: center;
+}
+
+.pad{
+    padding: 1rem;
+}
+
+
+.cont2 {
+    background-color: cornflowerblue;
+    margin-top: 10rem;
+    display: grid;
+
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+
+}
+
+.tw {
+    grid-column: 1/ span 2;
+}
+                                              
+.ts {
+    grid-column: 3;
+    grid-row: 2/ span 2 ;
+}

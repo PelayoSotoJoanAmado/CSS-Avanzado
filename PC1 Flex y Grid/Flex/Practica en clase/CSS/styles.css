@@ -1,0 +1,92 @@
+html {
+    box-sizing: border-box;
+
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+
+header {
+    background-color: aquamarine;
+    padding: 2rem;
+    margin: auto;
+    position: sticky;
+    width: 100%;
+}
+
+main {
+    display: flex;
+}
+
+section {
+    /* margin: .5rem auto .5rem auto; */
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    /* flex-wrap: wrap; */
+}
+
+
+aside {
+    background-color: bisque;
+    padding: 2rem;
+    display: flex;
+    /* flex-direction: column; */
+    width: 350px;
+    min-height: 100vh;
+    margin: .5rem .5rem .5rem 0;
+
+}
+
+.tarjetas {
+    display: flex;
+    background-color: thistle;
+    padding: 1rem;
+    border-radius: 1rem;;
+    flex-wrap: wrap;
+    gap: 10px;
+    /* flex-direction: column; */
+    margin: .5rem 0 .5rem .5rem;
+    align-content: flex-start;
+    max-height: 100dvh;
+}
+
+article {
+    width: 15rem;
+    height: 10rem;
+    background-color: chartreuse;
+    padding: auto;
+    place-content: center;
+    text-align: center;
+    flex-basis: auto;
+    flex-grow: 0; 
+    flex-shrink: 2;
+    /* flex: 1 1 calc(33.33% - 20px); */
+
+}
+
+img {
+    max-width: 100%;
+    padding: 5%;
+
+}
+
+.te {
+    background-image: url(https://m.media-amazon.com/images/I/71pAwqFlKpL._AC_UF894,1000_QL80_.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+
+@media screen and (max-width: 768px) {
+
+    aside {
+        display:none;
+    }
+
+
+}

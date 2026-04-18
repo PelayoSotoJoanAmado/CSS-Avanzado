@@ -1,0 +1,86 @@
+
+*, *::before, *::after{
+    box-sizing: border-box;
+}
+
+body {
+    align-items: stretch;
+}
+
+.dashboard{
+    background-color: aqua;
+    gap: 5px;
+    padding: 8px;
+    display: grid;
+
+    min-height: 100vh;
+    
+    grid-template-areas: 
+        "nav head head"
+        "nav main stats"
+        "nav foot foot";
+
+    grid-template-columns: minmax(15vw, 250px) minmax(200px, 1fr) minmax(50px, 15vw);
+    grid-template-rows: 80px 1fr 60px;
+    
+}
+
+.sidebar {
+    background-color: rgb(22, 141, 28);
+    grid-area: nav;
+}
+
+.main-view {
+    display:flex;
+    background-color: blue;
+    grid-area: main;
+    /* max-height: 100vdh; */
+    align-content: flex-start;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.footer {
+    background-color: blueviolet;
+    grid-area: foot;
+}
+
+.head {
+    background-color: rgb(129, 123, 115);
+    grid-area: head;
+}
+
+.stats {
+    background-color: coral;
+    grid-area: stats;
+}
+
+.articles{
+    flex: 1;
+    background-color: brown;
+    /* flex: 1 1 calc(33.33% - 20px); */
+    min-width: 50px;
+    height: 5rem;
+    text-align: center;
+    align-content: center;
+}
+
+
+
+@media screen and (max-width: 728px) {
+    
+    .dashboard {
+        grid-template-areas: 
+        "head head head"
+        "nav main stats"
+        "nav foot foot";
+
+        /* grid-column: span 2 */
+    }
+
+    
+
+    
+}
+
+
